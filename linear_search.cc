@@ -13,17 +13,29 @@ int main()
 	int numbers[SIZE] = {3, 6, -19, 5, 5, 0, -2, 99};
 	int found;
 	int number;
-
-	cout << "Enter a number to search for:" << endl;
+    
+	cout << "Enter a number to search for. Enter -99999 to exit." << endl;
 	cin >> number;
+	
+	while (number != -99999)
+	{
 
-	found = searchList(numbers, SIZE, number);
-	if (found == -1)
-		cout << "The number " << number 
-             << " was not found in the list" << endl;
-	else
-		cout << "The number " << number <<" is in the " << found + 1
-		     << " position of the list" << "." << endl;
+        if (found == -1)
+        {
+        	cout << "The number " << number 
+                 << " was not found in the list" << endl;
+                 cin >> number;
+                 found = searchList(numbers, SIZE, number);
+        }
+        
+        else if(found != -1)
+        {
+        	cout << "The number " << number <<" is in the " << found + 1
+        	     << " position of the list" << "." << endl;
+        	     cin >> number;
+        	      found = searchList(numbers, SIZE, number);
+        }
+	}
 
 	return 0;
 
