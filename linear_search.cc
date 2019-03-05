@@ -1,8 +1,9 @@
-// This program performs a linear search on a character array
+//This program performs a linear search on an integer array
 
-// Beatrix House
+//Beatrix House
 
 #include<iostream>
+#include<fstream>
 using namespace std;
 
 int searchList( int[], int, int); // function prototype
@@ -10,33 +11,48 @@ const int SIZE = 8;
 
 int main()
 {
-	int numbers[SIZE] = {3, 6, -19, 5, 5, 0, -2, 99};
+    ifstream inputFile;
+    inputFile.open("gradfile.txt");
+    int numArr[SIZE];
 	int found;
 	int number;
-    
-	cout << "Enter a number to search for. Enter -99999 to exit." << endl;
-	cin >> number;
+	int pos =0;
 	
-	while (number != -99999)
+	inputFile >> numArr[pos];
+	cout << "The grades read in from the file are: " << numArr[pos] << "." << endl;
+	
+	while (inputFile.good())
 	{
-
-        if (found == -1)
-        {
-        	cout << "The number " << number 
-                 << " was not found in the list" << endl;
-                 cin >> number;
-                 found = searchList(numbers, SIZE, number);
-        }
-        
-        else if(found != -1)
-        {
-        	cout << "The number " << number <<" is in the " << found + 1
-        	     << " position of the list" << "." << endl;
-        	     cin >> number;
-        	      found = searchList(numbers, SIZE, number);
-        }
+	    pos++;
+	    inputFile >> numArr[pos];
+	    cout << "The grades read in from the file are: " << numArr[pos] << "." << endl;
 	}
-
+	    
+    cout << "Enter a number to search for. Enter -99999 to exit." << endl;
+    cin >> number;
+	    
+	    while (number != -99999)
+    	{
+            
+            found = searchList(numArr, SIZE, number);
+            if (found == -1)
+            {
+            	cout << "The number " << number 
+                     << " was not found in the list" << endl;
+            }
+            
+            else
+            {
+            	cout << "The number " << number <<" is in the " << found + 1
+            	     << " position of the list" << "." << endl;
+            }
+            
+            cout << "Enter a number to search for. Enter -99999 to exit." << endl;
+            cin >> number;
+    
+    	}
+    
+    inputFile.close();
 	return 0;
 
 }
